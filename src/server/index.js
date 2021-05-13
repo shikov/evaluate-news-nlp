@@ -23,12 +23,14 @@ app.post('/test', function(req, res) {
     const params = new URLSearchParams();
     params.append('key', process.env.API_KEY)
     params.append('lang', 'auto')
-    if(req.body.input !== "") params.append('txt', req.body.input)
-    else params.append('url', req.body.url)
+    params.append('url', req.body.url)
     fetch('https://api.meaningcloud.com/sentiment-2.1', { method: 'POST', body: params })
     .then(response => {
-        if(response.status == 200) { return response.json()}
-        else { res.status(500).send({ status: { code: "100", msg: "internal server error" } }) }
+        if(!response.ok) { throw new FetchError(res.status, res.statusText, {response: res}) }
+        return response.json()
     })
     .then(json => res.json(json))
+    .catch(err => {
+        res.json({ status: { code: "400", msg: "Internal server error" } })
+    })
 })
