@@ -10,7 +10,7 @@ We will build a web tool that allows users to run Natural Language Processing (N
 
 You should have [nodejs](https://nodejs.org) installed your lacal machine then follow the folowing steps:
 
-- Clone the project: `clone`
+- Clone the project: `git clone https://github.com/shikov/evaluate-news-nlp.git`
 - CD to project directory.
 - Run in terminal: `npm intall`
 
